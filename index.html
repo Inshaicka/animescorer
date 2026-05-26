@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Scorer — субъективная оценка</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <nav class="nav">
+            <a href="#home" class="logo">AnimeScorer</a>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active" data-page="home">Оценить</a>
+                <a href="#list" class="nav-link" data-page="list">Мой топ</a>
+                <a href="#criteria" class="nav-link" data-page="criteria">Критерии</a>
+                <a href="#stats" class="nav-link" data-page="stats">Статистика</a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<nav class="bottom-nav">
+    <button class="bottom-nav-item active" data-page="home">
+        <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v9h6v-5h2v5h6v-9h3L12 3z"/></svg>
+        Оценить
+    </button>
+    <button class="bottom-nav-item" data-page="list">
+        <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+        Мой топ
+    </button>
+    <button class="bottom-nav-item" data-page="criteria">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        Критерии
+    </button>
+    <button class="bottom-nav-item" data-page="stats">
+        <svg viewBox="0 0 24 24"><path d="M3 3v18h18V3H3zm8 14H7v-7h4v7zm6 0h-4V7h4v10z"/></svg>
+        Статистика
+    </button>
+</nav>
+
+<main class="container">
+
+    <!-- ── Страница оценки ── -->
+    <div id="home-page" class="page active">
+        <div class="top3-widget" id="top3Widget">
+            <h3>🏆 Мой топ-3</h3>
+            <div class="top3-list" id="top3List"></div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Оценка аниме</h2>
+                <p>Сначала оцените по критериям, затем добавьте название и постер</p>
+            </div>
+
+            <div class="assessment-grid">
+                <div class="criteria-container">
+                    <!-- Сюжет -->
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <h4>
+                                <svg class="criteria-icon" viewBox="0 0 24 24"><path d="M13 16h-1v-4h1m0-4h-1v2h1m5-8H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V4a2 2 0 00-2-2z"/></svg>
+                                Сюжет
+                            </h4>
+                            <div class="score-value" id="storyValue">5</div>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" id="storySlider" min="1" max="10" step="1" value="5">
+                        </div>
+                        <div class="slider-labels"><span>1 (Провал)</span><span>5 (Норма)</span><span>10 (Шедевр)</span></div>
+                        <div class="quick-guide"><strong>10:</strong> Безупречная логика, идеальный темп<br><strong>5:</strong> Формульность, функция развлечения<br><strong>1:</strong> Полное отсутствие логики</div>
+                    </div>
+
+                    <!-- Персонажи -->
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <h4>
+                                <svg class="criteria-icon" viewBox="0 0 24 24"><path d="M12 4a4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4 4 4 0 014-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4z"/></svg>
+                                Персонажи
+                            </h4>
+                            <div class="score-value" id="charsValue">5</div>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" id="charsSlider" min="1" max="10" step="1" value="5">
+                        </div>
+                        <div class="slider-labels"><span>1 (Функции)</span><span>5 (Роли)</span><span>10 (Живые)</span></div>
+                        <div class="quick-guide"><strong>10:</strong> Сложная психология, эволюция<br><strong>5:</strong> Выполняют роли, развитие минимально<br><strong>1:</strong> Невыносимые, раздражают</div>
+                    </div>
+
+                    <!-- Анимация -->
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <h4>
+                                <svg class="criteria-icon" viewBox="0 0 24 24"><path d="M18 9l-6-4v3H6v2h6v3m-8 5v-5h2v3h4v2m12-8v10a2 2 0 01-2 2H4a2 2 0 01-2-2V9a2 2 0 012-2h16a2 2 0 012 2z"/></svg>
+                                Анимация
+                            </h4>
+                            <div class="score-value" id="animValue">5</div>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" id="animSlider" min="1" max="10" step="1" value="5">
+                        </div>
+                        <div class="slider-labels"><span>1 (Провал)</span><span>5 (Функционально)</span><span>10 (Шедевр)</span></div>
+                        <div class="quick-guide"><strong>10:</strong> Анимация как инструмент выражения<br><strong>5:</strong> Функционально, экономят на фонах<br><strong>1:</strong> Технически несостоятельно</div>
+                    </div>
+
+                    <!-- Идея -->
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <h4>
+                                <svg class="criteria-icon" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+                                Идея
+                            </h4>
+                            <div class="score-value" id="ideaValue">5</div>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" id="ideaSlider" min="1" max="10" step="1" value="5">
+                        </div>
+                        <div class="slider-labels"><span>1 (Каша)</span><span>5 (База)</span><span>10 (Глубина)</span></div>
+                        <div class="quick-guide"><strong>10:</strong> Глубокая оригинальная идея<br><strong>5:</strong> Тема на развлекательном уровне<br><strong>1:</strong> Эклектика, нет смыслового стержня</div>
+                    </div>
+                </div>
+
+                <div class="results-sidebar">
+                    <div class="vibe-section">
+                        <div class="vibe-header">
+                            <h4>Вайб-коэффициент</h4>
+                            <div class="vibe-value" id="vibeValue">1.0</div>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" id="vibeSlider" min="1.0" max="2.0" step="0.1" value="1.0">
+                        </div>
+                        <div class="vibe-labels"><span>1.0 (Нейтрально)</span><span>1.5 (Хорошо)</span><span>2.0 (Восторг)</span></div>
+                        <div class="vibe-description" id="vibeDescription">Личное отношение. Не портит оценку, только усиливает хорошее.</div>
+                    </div>
+
+                    <div class="result-card">
+                        <div class="result-label">Итоговая оценка</div>
+                        <div class="result-score" id="finalScore">5.0</div>
+                        <div class="result-label" id="finalPercent">50%</div>
+                        <div class="result-details">
+                            <div class="detail-item"><div class="detail-label">Средний балл</div><div class="detail-value" id="avgScore">5.0</div></div>
+                            <div class="detail-item"><div class="detail-label">Без вайба</div><div class="detail-value" id="baseScore">5.0</div></div>
+                            <div class="detail-item"><div class="detail-label">Сюжет</div><div class="detail-value" id="detailStory">5</div></div>
+                            <div class="detail-item"><div class="detail-label">Персонажи</div><div class="detail-value" id="detailChars">5</div></div>
+                            <div class="detail-item"><div class="detail-label">Анимация</div><div class="detail-value" id="detailAnim">5</div></div>
+                            <div class="detail-item"><div class="detail-label">Идея</div><div class="detail-value" id="detailIdea">5</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="meta-section">
+                <div class="meta-grid">
+                    <div>
+                        <label for="titleInput" style="display:block;margin-bottom:0.5rem;color:var(--text-muted);">Название аниме</label>
+                        <input type="text" id="titleInput" class="title-input" placeholder="Например: Monster, Steins;Gate, Attack on Titan...">
+
+                        <div style="margin-top:1rem;">
+                            <label style="display:block;margin-bottom:0.4rem;color:var(--text-muted);font-size:0.875rem;">Жанры <span style="font-size:0.75rem;opacity:0.6">(заполняется автоматически)</span></label>
+                            <input type="text" id="genresInput" placeholder="Например: Сёнен, Боевик, Фэнтези...">
+                        </div>
+
+                        <div style="margin-top:0.75rem;">
+                            <label style="display:block;margin-bottom:0.4rem;color:var(--text-muted);font-size:0.875rem;">Краткое описание <span style="font-size:0.75rem;opacity:0.6">(заполняется автоматически)</span></label>
+                            <textarea id="synopsisInput" rows="3" placeholder="Synopsis подтянется из Shikimori при выборе постера..." style="width:100%;background:var(--card-dark);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);padding:0.6rem;font-size:0.85rem;resize:vertical;line-height:1.4;"></textarea>
+                        </div>
+
+                        <div style="margin-top:0.75rem;">
+                            <label style="display:block;margin-bottom:0.4rem;color:var(--text-muted);font-size:0.875rem;">🔒 Приватные заметки <span style="font-size:0.75rem;opacity:0.6">(не попадают в экспорт)</span></label>
+                            <div class="notes-toolbar" id="notesToolbar">
+                                <button type="button" class="ntb-btn" onclick="notesExec('bold')" title="Жирный"><b>Ж</b></button>
+                                <button type="button" class="ntb-btn" onclick="notesExec('italic')" title="Курсив"><i>К</i></button>
+                                <button type="button" class="ntb-btn" onclick="notesExec('underline')" title="Подчёркнутый"><u>П</u></button>
+                                <div class="ntb-sep"></div>
+                                <button type="button" class="ntb-btn ntb-size" onclick="notesFontSize(1)" title="Уменьшить шрифт">A−</button>
+                                <button type="button" class="ntb-btn ntb-size" onclick="notesFontSize(2)" title="Обычный шрифт">A</button>
+                                <button type="button" class="ntb-btn ntb-size" onclick="notesFontSize(3)" title="Увеличить шрифт">A+</button>
+                                <div class="ntb-sep"></div>
+                                <button type="button" class="ntb-color" style="background:#facc15" onclick="notesColor('#facc15')" title="Жёлтое выделение"></button>
+                                <button type="button" class="ntb-color" style="background:#f87171" onclick="notesColor('#f87171')" title="Красное выделение"></button>
+                                <button type="button" class="ntb-color" style="background:#4ade80" onclick="notesColor('#4ade80')" title="Зелёное выделение"></button>
+                                <button type="button" class="ntb-color" style="background:#60a5fa" onclick="notesColor('#60a5fa')" title="Синее выделение"></button>
+                                <button type="button" class="ntb-color" style="background:#c084fc" onclick="notesColor('#c084fc')" title="Фиолетовое выделение"></button>
+                                <button type="button" class="ntb-btn ntb-clear" onclick="notesColor(null)" title="Убрать цвет">✕</button>
+                            </div>
+                            <div id="notesEditor"
+                                 contenteditable="true"
+                                 class="notes-editor"
+                                 data-placeholder="Личные впечатления, мысли..."></div>
+                            <textarea id="notesInput" style="display:none;"></textarea>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="seasons-header">
+                            <label style="color:var(--text-muted);font-size:0.875rem;font-weight:500;">Сезоны</label>
+                            <div class="seasons-count-row">
+                                <input type="number" id="seasonsCountInput" value="1" min="1" max="20" style="width:64px;text-align:center;">
+                                <span style="font-size:0.8rem;color:var(--text-muted);">сезон(ов)</span>
+                                <button class="btn-secondary" id="applySeasonsBtn" onclick="applySeasonsCount()">Применить</button>
+                            </div>
+                        </div>
+
+                        <div id="seasonsContainer"></div>
+
+                        <div class="poster-upload" id="posterUpload" style="margin-top:1rem;">
+                            <img id="posterPreview" src="" alt="Постер" style="display:none;">
+                            <div class="upload-placeholder">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M3 16L10 9L13 12L21 4" stroke-width="2"/>
+                                    <rect x="3" y="3" width="18" height="18" rx="2" stroke-width="2"/>
+                                </svg>
+                                <small>Загрузить постер</small>
+                            </div>
+                        </div>
+
+                        <div id="totalWatchTime" class="total-watch-time"></div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn-primary" id="saveBtn">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+                        Сохранить оценку
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Страница списка ── -->
+    <div id="list-page" class="page">
+        <div class="card">
+            <div class="card-header">
+                <h2>Мой субъективный топ</h2>
+                <div class="stats-row" id="statsRow" style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:0.75rem;"></div>
+            </div>
+
+            <div class="backup-reminder" id="backupReminder">
+                <span style="font-size:1.1rem">☁️</span>
+                <span class="backup-reminder-text" id="backupReminderText">Не забудь обновить бэкап на Google Drive!</span>
+                <button onclick="openDriveModal(); dismissReminder()">Сохранить сейчас</button>
+                <button class="dismiss-btn" title="Напомнить завтра" onclick="dismissReminder()">×</button>
+            </div>
+
+            <div class="list-controls">
+                <div class="sort-options">
+                    <select id="sortSelect">
+                        <option value="date_desc" selected>По дате (новые сначала)</option>
+                        <option value="date_asc">По дате (старые сначала)</option>
+                        <option value="avg_desc">По среднему баллу (высокие → низкие)</option>
+                        <option value="avg_asc">По среднему баллу (низкие → высокие)</option>
+                        <option value="final_desc">По общей оценке (высокие → низкие)</option>
+                        <option value="final_asc">По общей оценке (низкие → высокие)</option>
+                    </select>
+
+                    <input type="text" id="searchInput" placeholder="Поиск по названию..." style="min-width:200px;">
+                </div>
+
+                <div class="action-buttons import-export-buttons">
+                    <button class="btn-success" id="importBtn">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/></svg>
+                        <span class="btn-label">Импорт JSON</span>
+                    </button>
+                    <button class="btn-secondary" id="exportBtn">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                        <span class="btn-label">Экспорт JSON</span>
+                    </button>
+                    <button class="btn-gdrive" id="driveBackupBtn">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M6.6 2L2 10.5l4.4 7.5h11.2L22 10.5 17.4 2H6.6zm0 1.5h10.8l4 6.8H2.6l4-6.8zm-2.2 8.3h15.2l-3.8 6.5H8.2l-3.8-6.5z"/></svg>
+                        <span class="btn-label">Google Drive</span>
+                    </button>
+                    <button class="btn-danger" id="clearAllBtn">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                        <span class="btn-label">Очистить все</span>
+                    </button>
+                </div>
+
+                <!-- Переключатель режима карточек -->
+                <div class="card-size-selector">
+                    <span class="selector-label">Вид карточек:</span>
+                    <div class="btn-group">
+                        <button class="btn-pill card-size-btn" data-size="default">Стандарт</button>
+                        <button class="btn-pill card-size-btn" data-size="compact">Компакт</button>
+                        <button class="btn-pill card-size-btn" data-size="gallery">Галерея</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="animeList" class="anime-grid"></div>
+            <div class="load-more-container" id="loadMoreContainer"></div>
+        </div>
+    </div>
+
+    <!-- ── Страница критериев ── -->
+    <div id="criteria-page" class="page">
+        <div class="card">
+            <div class="card-header">
+                <h2>Критерии оценки</h2>
+                <p>Строгие рамки для объективной оценки. Следуйте этим правилам, чтобы избежать завышения/занижения.</p>
+            </div>
+            <div class="criteria-grid">
+ 
+                <!-- Сюжет -->
+                <div class="criterion-card">
+                    <div class="criterion-title">Сюжет (1-10)</div>
+                    <div class="criterion-levels">
+                        <div class="level level-10">
+                            <div class="level-header"><div class="level-name">Замкнутая архитектура</div><div class="level-score">10</div></div>
+                            <div>У истории есть конкретное смысловое ядро — цель, конфликт или вопрос, ради которого всё и рассказывается. Каждое событие работает на это ядро. Нет сцен «для галочки», нет провисаний. Финал не просто хороший — он ретроспективно оправдывает всё увиденное и придаёт смысл деталям, которые казались незначительными.</div>
+                            <div class="level-genres">Психологические триллеры, сложная научная фантастика, драмы с нелинейным повествованием</div>
+                            <div class="level-examples">Монстр, Врата Штейна, Ангельские ритмы</div>
+                        </div>
+                        <div class="level level-8">
+                            <div class="level-header"><div class="level-name">Крепкая конструкция</div><div class="level-score">8-9</div></div>
+                            <div>Сюжет логично выстроен, напряжение держится. Финал сильный, но не обязательно идеальный. Ядро есть, но повествование иногда уходит в сторону — не критично, но заметно.</div>
+                            <div class="level-genres">Сёнен-экшены высокого уровня, качественная драма, детективы, сёдзе с глубоким сюжетом</div>
+                            <div class="level-examples">Созданный в бездне, Атака титанов, Ниер: Автомата — Версия 1.1а, Класс убийц</div>
+                        </div>
+                        <div class="level level-6">
+                            <div class="level-header"><div class="level-name">Рабочая схема</div><div class="level-score">6-7</div></div>
+                            <div>История движется по знакомым рельсам, интерес держится, смотреть не скучно. Отдельные повороты предсказуемы. Внутри жанра всё работает — за пределами жанровых ожиданий ничего нет.</div>
+                            <div class="level-genres">Романтические комедии, повседневность (слайс-оф-лайф), традиционные исекай, споконы</div>
+                            <div class="level-examples">Милый во Франксе, Класс превосходства, Магия и мускулы, Ремейк нашей жизни, Токийские мстители</div>
+                        </div>
+                        <div class="level level-5">
+                            <div class="level-header"><div class="level-name">Базовый уровень</div><div class="level-score">5</div></div>
+                            <div>Сюжет выполняет одну функцию — не даёт зрителю уйти. Конфликты поверхностные, развитие предсказуемо. Глубины нет, но и откровенных провалов тоже.</div>
+                            <div class="level-genres">Лёгкие гаремники, стандартные комедии, фансервисные сериалы</div>
+                            <div class="level-examples">Я женился на однокласснице, которую ненавидел, Госпожа Кагуя: В любви как на войне, Дни Сакамото</div>
+                        </div>
+                        <div class="level level-3">
+                            <div class="level-header"><div class="level-name">Декорация</div><div class="level-score">3-4</div></div>
+                            <div>Сюжет существует, чтобы обслуживать фансервис, комедийные скетчи или боёвку. Решения персонажей продиктованы нуждами сцены, а не логикой. Много filler'а или искусственных конфликтов.</div>
+                            <div class="level-genres">Низкобюджетные исекай, неудачные ромкомы, поздние сезоны выдохшихся проектов</div>
+                            <div class="level-examples">Любовь и ложь, Пожалуйста, оденьтесь, Такаминэ, Кафе из другого мира, Убивая слизней триста лет...</div>
+                        </div>
+                        <div class="level level-1">
+                            <div class="level-header"><div class="level-name">Развалившееся здание</div><div class="level-score">1-2</div></div>
+                            <div>Причинно-следственная связь разрушена. Сюжетные дыры не закрываются. Финал либо отсутствует, либо перечёркивает смысл просмотра.</div>
+                            <div class="level-genres">Крайне неудачные адаптации, проекты с катастрофическим производством</div>
+                            <div class="level-examples">Обещанный Неверленд 2 сезон</div>
+                        </div>
+                    </div>
+                </div>
+ 
+                <!-- Персонажи -->
+                <div class="criterion-card">
+                    <div class="criterion-title">Персонажи (1-10)</div>
+                    <div class="criterion-levels">
+                        <div class="level level-10">
+                            <div class="level-header"><div class="level-name">Живой человек</div><div class="level-score">10</div></div>
+                            <div>Значимые персонажи — сложные, иногда противоречивые личности. Мотивация многослойна и не объясняется напрямую — она считывается через поступки, реакции в кризисных точках, детали поведения, флешбеки. Поступки одного персонажа влияют на восприятие другого. После финала думаешь о них как о реальных людях.</div>
+                            <div class="level-genres">Психологическая драма, литературные адаптации, сёнен/сёдзе с акцентом на драму и рост</div>
+                            <div class="level-examples">Монстр, Фрирен, Врата Штейна</div>
+                        </div>
+                        <div class="level level-8">
+                            <div class="level-header"><div class="level-name">Убедительная личность</div><div class="level-score">8-9</div></div>
+                            <div>Большинство значимых персонажей имеют понятную и последовательную мотивацию — их поступки не противоречат тому, кто они есть. Есть сцены, которые раскрывают их глубже: флешбек, реакция в кризисной точке, разговор, который меняет восприятие героя. Может не хватать финального слоя сложности, но после просмотра помнишь людей, а не функции.</div>
+                            <div class="level-genres">Качественные сёнен-экшены, драмы о взрослении, сёдзе о карьере/хобби, триллеры</div>
+                            <div class="level-examples">Голубой период, Вайолет Эвергарден, Класс убийц</div>
+                        </div>
+                        <div class="level level-6">
+                            <div class="level-header"><div class="level-name">Архетип, который ожил</div><div class="level-score">6-7</div></div>
+                            <div>Персонажи начинают как типажи, но часть из них получает достаточно экранного времени, чтобы выйти за рамки архетипа. Мотивация понятна, хоть и не удивляет. Помнишь их скорее по дизайну и озвучке, чем по глубине.</div>
+                            <div class="level-genres">Большинство ромкомов, стандартные исекай, боевики-сёнены, споконы</div>
+                            <div class="level-examples">Магическая битва, Торадора!, Моё перерождение в слизь</div>
+                        </div>
+                        <div class="level level-5">
+                            <div class="level-header"><div class="level-name">Функция</div><div class="level-score">5</div></div>
+                            <div>Персонажи выполняют свою роль в сюжете или жанре, не больше. Мотивация формально присутствует, но не вызывает интереса. После просмотра помнишь скорее ситуации, чем самих героев.</div>
+                            <div class="level-genres">Комедийные повседневности, лёгкие гаремники, аниме где идея/экшн важнее персонажей</div>
+                            <div class="level-examples">Доктор Стоун (часть героев), многие героини в стандартных гаремах</div>
+                        </div>
+                        <div class="level level-3">
+                            <div class="level-header"><div class="level-name">Набор клише</div><div class="level-score">3-4</div></div>
+                            <div>Характеры собраны из тропов без склейки. Поступки противоречат заявленным чертам или меняются под нужды сцены. Мотивация либо отсутствует, либо появляется тогда, когда это удобно автору.</div>
+                            <div class="level-genres">Низкокачественные ромкомы/гаремы, исекай-конвейер, фансервисные проекты</div>
+                            <div class="level-examples">Пять невест, Сведённые кукушкой</div>
+                        </div>
+                        <div class="level level-1">
+                            <div class="level-header"><div class="level-name">Раздражитель</div><div class="level-score">1-2</div></div>
+                            <div>Персонаж действует вразрез со здравым смыслом без художественной цели. Диалоги неестественны. Присутствие в кадре мешает, а не помогает.</div>
+                            <div class="level-genres">Крайне неудачные проекты-«самоинсерты», аниме с откровенно плохим сценарием</div>
+                            <div class="level-examples">В другом мире со смартфоном (протагонист)</div>
+                        </div>
+                    </div>
+                </div>
+ 
+                <!-- Анимация -->
+                <div class="criterion-card">
+                    <div class="criterion-title">Анимация (1-10)</div>
+                    <div class="criterion-levels">
+<p> система требует оценивать визуал по его задачам </p>
+                        <div class="level level-10">
+                            <div class="level-header"><div class="level-name">Изображение говорит</div><div class="level-score">10</div></div>
+                            <div>Эмоции и состояния персонажей читаются через картинку — мимику, позу, взгляд, детали окружения — без опоры на диалог. Режиссёрские решения (угол камеры, свет, монтажный ритм) усиливают то, что происходит внутри сцены. Каждый кадр осознан: видно, что художник думал, зачем именно так, а не иначе.</div>
+                            <div class="level-genres">Полнометражные фильмы Kyoto Animation, Makoto Shinkai, Studio Ghibli, премиальные ТВ-проекты</div>
+                            <div class="level-examples">Форма голоса, Вайолет Эвергарден, Звёздное дитя, Фрирен, Пять сантиметров в секунду</div>
+                        </div>
+                        <div class="level level-8">
+                            <div class="level-header"><div class="level-name">Сильный визуальный язык</div><div class="level-score">8-9</div></div>
+                            <div>Студия или режиссёр владеют узнаваемым стилем, который работает на атмосферу. Важные сцены — будь то экшен, эмоциональный момент или просто пауза — решены визуально интересно. Чувствуется, что за картинкой стоят осознанные решения. Не хватает той степени детальности и последовательности, которая переводит в десятку.</div>
+                            <div class="level-genres">Экшен-проекты с сильной режиссурой (Science SARU, TRIGGER), сюрреалистичные произведения</div>
+                            <div class="level-examples">Клинок, рассекающий демонов, Человек-бензопила, Дандадан, Голубая шкатулка</div>
+                        </div>
+                        <div class="level level-6">
+                            <div class="level-header"><div class="level-name">Стабильное качество</div><div class="level-score">6-7</div></div>
+                            <div>Без провалов и без откровений. Ключевые сцены сделаны нормально, остальное — профессионально, но не запоминается. Анимация не мешает и не помогает сверх необходимого.</div>
+                            <div class="level-genres">Успешные сёнен-экшены от крупных студий, качественные ромкомы и драмы</div>
+                            <div class="level-examples">Re:Zero, Доктор Стоун, Монолог фармацевта</div>
+                        </div>
+                        <div class="level level-5">
+                            <div class="level-header"><div class="level-name">Функциональная</div><div class="level-score">5</div></div>
+                            <div>Минимум ресурсов использован там, где нужно. Диалоговые сцены упрощены, движение экономное. Не мешает смотреть.</div>
+                            <div class="level-genres">Диалоговые/повседневные аниме, низкобюджетные адаптации</div>
+                            <div class="level-examples">Так сложно любить отаку, В другом мире со смартфоном, Моя подруга-олениха Нокотан</div>
+                        </div>
+                        <div class="level level-3">
+                            <div class="level-header"><div class="level-name">Экономная</div><div class="level-score">3-4</div></div>
+                            <div>Статичные кадры преобладают. Повторы, loop-анимация. В моменты, где нужна отдача — её нет.</div>
+                            <div class="level-genres">Долгоиграющие сериалы, проекты с проблемами в производстве</div>
+                            <div class="level-examples">Прекрасна, как Луна, Сатана на подработке (поздние сезоны)</div>
+                        </div>
+                        <div class="level level-1">
+                            <div class="level-header"><div class="level-name">Мешает смотреть</div><div class="level-score">1-2</div></div>
+                            <div>Кривые движения, плохой монтаж, визуальный шум. Анимация активно разрушает восприятие.</div>
+                            <div class="level-genres">Явные провалы производства, крайне неудачные CGI-эксперименты</div>
+                            <div class="level-examples">Берсерк 2016</div>
+                        </div>
+                    </div>
+                </div>
+ 
+                <!-- Идея -->
+                <div class="criterion-card">
+                    <div class="criterion-title">Идея (1-10)</div>
+                    <div class="criterion-levels">
+                        <div class="level level-10">
+                            <div class="level-header"><div class="level-name">Вопрос без готового ответа</div><div class="level-score">10</div></div>
+                            <div>Идея — это не тема, это несущая конструкция всего произведения. Сюжет, персонажи, детали — всё работает на один большой вопрос, у которого <b class="emphasis">нет готового ответа</b>. После просмотра думаешь не о том, что произошло, а о том, что это значит.</div>
+                            <div class="level-genres">Психологические триллеры, киберпанк, сложная научная фантастика, философская притча</div>
+                            <div class="level-examples">Монстр, Призрак в доспехах, Врата Штейна, Единственному мне, кто тебя любил</div>
+                        </div>
+                        <div class="level level-8">
+                            <div class="level-header"><div class="level-name">Спрятанная, но цельная</div><div class="level-score">8-9</div></div>
+                            <div>Философская мысль есть, она продуманная и нетривиальная — но не несущая, а встроенная. При поверхностном просмотре можно не заметить, при анализе обнаруживается цельной. Не ставит неразрешимых вопросов, но заставляет думать.</div>
+                            <div class="level-genres">Тёмное фэнтези, антиутопии, нестандартные исекай, сёнен с небанальным сеттингом</div>
+                            <div class="level-examples">Re:Zero, Пластиковые воспоминания, Психопаспорт, Созданный в бездне, Фрирен</div>
+                        </div>
+                        <div class="level level-6">
+                            <div class="level-header"><div class="level-name">Хорошая предпосылка</div><div class="level-score">6-7</div></div>
+                            <div>Тема читается без усилий, авторы не скрывают, о чём говорят. Философского измерения нет — есть посыл, мораль или просто необычная предпосылка. Одного слоя хватает на просмотр, но не на размышление после.</div>
+                            <div class="level-genres">Драмы с элементами фантастики, романтические аниме с необычной предпосылкой</div>
+                            <div class="level-examples">Город, в котором меня нет, Милый во Франксе, Ремейк нашей жизни</div>
+                        </div>
+                        <div class="level level-5">
+                            <div class="level-header"><div class="level-name">Фон</div><div class="level-score">5</div></div>
+                            <div>Идея служит декорацией. Никакого заявления — просто развлечение. Нормально, если это и было целью.</div>
+                            <div class="level-genres">Чистые экшены, спортивные аниме, лёгкие комедии</div>
+                            <div class="level-examples">Ванпанчмен, Кэнган Асура, Магия и мускулы</div>
+                        </div>
+                        <div class="level level-3">
+                            <div class="level-header"><div class="level-name">Пусто или мутно</div><div class="level-score">3-4</div></div>
+                            <div>Либо идеи нет вообще, либо она подаётся так хаотично, что смысл теряется по дороге.</div>
+                            <div class="level-genres">Конвейерные исекай/гаремы, неудачные попытки смешать жанры</div>
+                            <div class="level-examples">Токийский гуль (после S1), Цикл историй</div>
+                        </div>
+                        <div class="level level-1">
+                            <div class="level-header"><div class="level-name">Отсутствует</div><div class="level-score">1-2</div></div>
+                            <div>Набор элементов без связующего смысла.</div>
+                            <div class="level-genres">Пародийные/абсурдистские аниме, откровенно слабые проекты</div>
+                            <div class="level-examples">Другой мир не может противостоять силе мгновенной смерти</div>
+                        </div>
+                    </div>
+                </div>
+ 
+                <!-- Вайб-коэффициент -->
+                <div class="criterion-card">
+                    <div class="criterion-title">Вайб-коэффициент (1.0-2.0)</div>
+                    <div class="criterion-levels">
+                        <div class="level" style="border-color:#10b981;">
+                            <div class="level-header"><div class="level-name">Абсолютный восторг</div><div class="level-score">2.0</div></div>
+                            <div>Произведение, изменившее взгляд на жанр или аниме в целом. Хочется пересматривать и анализировать</div>
+                        </div>
+                        <div class="level" style="border-color:#3b82f6;">
+                            <div class="level-header"><div class="level-name">Очень сильное впечатление</div><div class="level-score">1.8</div></div>
+                            <div>Залипание, "биндж", постоянные мысли об аниме после просмотра</div>
+                        </div>
+                        <div class="level" style="border-color:#8b5cf6;">
+                            <div class="level-header"><div class="level-name">Выше среднего</div><div class="level-score">1.5</div></div>
+                            <div>Явно зацепило, были сильные эмоциональные моменты</div>
+                        </div>
+                        <div class="level" style="border-color:#f59e0b;">
+                            <div class="level-header"><div class="level-name">Нейтрально / Объективно</div><div class="level-score">1.0</div></div>
+                            <div>Личное отношение не усиливает и не ослабляет объективную оценку</div>
+                        </div>
+                    </div>
+                </div>
+ 
+                <!-- Формула -->
+                <div class="criterion-card">
+                    <div class="criterion-title">Формула оценки</div>
+                    <div style="padding:1rem 0;">
+                        <div style="background:rgba(255,255,255,0.05);padding:1rem;border-radius:var(--radius-sm);margin-bottom:1rem;">
+                            <div style="font-family:monospace;font-size:0.875rem;color:var(--text-muted);">
+                                1. Средний балл = (Сюжет + Персонажи + Анимация + Идея) / 4<br>
+                                2. Вайб = от 1.0 до 2.0<br>
+                                3. Итог = Средний балл × Вайб<br>
+                                4. Ограничение: максимум 10 баллов
+                            </div>
+                        </div>
+                        <div style="font-size:0.875rem;color:var(--text-muted);line-height:1.6;">
+                            <p><strong>Вайб не портит оценку, только усиливает хорошее!</strong></p>
+                        </div>
+                    </div>
+                </div>
+ 
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Страница статистики ── -->
+    <div id="stats-page" class="page">
+        <div class="card">
+            <div class="card-header">
+                <h2>Статистика</h2>
+                <p>Общая информация о просмотренном</p>
+            </div>
+            <div id="statsContent"></div>
+        </div>
+    </div>
+</main>
+
+<!-- ── Модалка Google Drive ── -->
+<div class="drive-modal-overlay" id="driveModal">
+    <div class="drive-modal">
+        <div style="width:40px;height:4px;background:rgba(255,255,255,0.15);border-radius:2px;margin:0 auto 1rem;"></div>
+        <h3>☁️ Бэкап на Google Drive</h3>
+        <p>Сохраняет JSON с оценками в папку <strong>AnimeScorerBackup</strong> на твоём Google Drive. Постеры хранятся как ссылки — файл весит килобайты.</p>
+        <p>Нужен <strong>Access Token</strong> от Google. Получить его просто:</p>
+        <ol class="drive-steps">
+            <li>Открой <a href="https://developers.google.com/oauthplayground" target="_blank" style="color:var(--accent)">OAuth 2.0 Playground</a></li>
+            <li>В списке слева найди <code>Drive API v3</code> → выбери <code>.../auth/drive.file</code></li>
+            <li>Нажми <strong>Authorize APIs</strong>, войди в Google</li>
+            <li>Нажми <strong>Exchange authorization code for tokens</strong></li>
+            <li>Скопируй <code>Access token</code> и вставь сюда:</li>
+        </ol>
+        <input type="text" class="drive-token-input" id="driveTokenInput" placeholder="ya29.xxxxxxxxxxxxxxxx...">
+        <div class="drive-actions">
+            <button class="btn-gdrive" id="driveUploadBtn" onclick="driveUpload()">
+                <svg class="icon" viewBox="0 0 24 24"><path d="M19.35 10.04A7.49 7.49 0 0012 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 000 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+                Сохранить бэкап
+            </button>
+            <button class="btn-secondary" onclick="closeDriveModal()">Закрыть</button>
+        </div>
+        <div class="drive-status" id="driveStatus"></div>
+    </div>
+</div>
+
+<!-- ── Модалка подтверждения ── -->
+<div id="confirmModal" class="modal">
+    <div class="modal-content">
+        <div style="width:40px;height:4px;background:rgba(255,255,255,0.15);border-radius:2px;margin:0 auto 1rem;"></div>
+        <div class="modal-header">
+            <div class="modal-title">Подтверждение</div>
+            <button class="close-btn" onclick="closeModal()">×</button>
+        </div>
+        <p id="modalMessage">Вы уверены?</p>
+        <div class="action-buttons" style="margin-top:1.5rem;justify-content:flex-end;">
+            <button class="btn-secondary" onclick="closeModal()">Отмена</button>
+            <button class="btn-danger" id="modalConfirmBtn">Подтвердить</button>
+        </div>
+    </div>
+</div>
+
+<script src="storage.js"></script>
+<script src="api.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
