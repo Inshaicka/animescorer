@@ -1,0 +1,6 @@
+<a href="javascript:alert('XSS')">click me</a>
+<object data="data:text/html,<script>alert('XSS')</script>">
+<iframe srcdoc="<script>alert('XSS')</script>"></iframe>
+<iframe src="javascript:alert('XSS')"></iframe>
+<div style="width: expression(alert('XSS'))">test</div>
+<embed src="data:text/html,<script>alert('XSS')</script>">
